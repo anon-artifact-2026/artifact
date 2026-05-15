@@ -1,0 +1,2 @@
+scheme,dataset,units,top_k,region_precision_at_k,hotspot_precision_at_k,hotspot_log_precision_at_k,layout_class_precision_at_k,distinct_precision_at_k,region_auc,load_auc,layout_class_auc,hotspot_auc,hotspot_log_auc,log_growth_auc,maintenance_auc,log_correlation,log_truth_correlation,maintenance_correlation
+LOCI-Full,geolife_lat-real_temporal-L200000-U1048576-B1024-T128,315,63,0.14285714285714285,1.0,0.30158730158730157,0.20634920634920634,0.0,0.5347379692617787,0.5347379692617787,0.5,0.9902368354749307,0.5,0.5,0.5,0.0,0.0,0.0

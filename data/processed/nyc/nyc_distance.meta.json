@@ -1,0 +1,28 @@
+{
+  "dataset": "nyc",
+  "attribute": "distance",
+  "source_files": [
+    "data/raw/nyc/yellow_tripdata_2025-01.parquet",
+    "data/raw/nyc/yellow_tripdata_2025-02.parquet"
+  ],
+  "rows": 1000000,
+  "value_min": 0,
+  "value_max": 158925090,
+  "time_min": 1735678075,
+  "time_max": 1736608770,
+  "schema": [
+    "rid",
+    "value",
+    "time"
+  ],
+  "sorted_by": "time",
+  "max_n": 1000000,
+  "raw_columns": [
+    "DOLocationID",
+    "PULocationID",
+    "total_amount",
+    "tpep_pickup_datetime",
+    "trip_distance"
+  ],
+  "value_scale": "round(trip_distance * 1000)"
+}

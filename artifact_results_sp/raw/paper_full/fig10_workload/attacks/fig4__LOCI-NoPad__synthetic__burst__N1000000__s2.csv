@@ -1,0 +1,2 @@
+scheme,dataset,units,top_k,region_precision_at_k,hotspot_precision_at_k,hotspot_log_precision_at_k,layout_class_precision_at_k,distinct_precision_at_k,region_auc,load_auc,layout_class_auc,hotspot_auc,hotspot_log_auc,log_growth_auc,maintenance_auc,log_correlation,log_truth_correlation,maintenance_correlation
+LOCI-NoPad,skew-burst-N1000000-U1048576-B1024-T128,1684,337,0.19881305637982197,1.0,0.8753709198813057,0.2314540059347181,0.0,0.5470911289842908,0.546314592929887,0.5,0.9831342977800982,0.9613483309431443,0.9613483309431443,0.5,0.9667346392265628,0.9893983310212106,0.0

@@ -1,0 +1,23 @@
+name: synthetic_smoke
+dataset:
+  type: synthetic
+benchmark:
+  N: 200
+  ops: 60
+  U: 1048576
+  B: 64
+  theta: 8
+  workload: hotspot
+  dist: skew
+  crypto: mock
+  out_dir: artifact_out/synthetic_smoke
+cases:
+  - {scheme: loci, variant: full}
+  - {scheme: loci, variant: nocert}
+  - {scheme: loci, variant: nopad}
+  - {scheme: loci, variant: noproto}
+  - {scheme: loci, variant: nopublicrefresh}
+  - {scheme: pgm, variant: naive}
+  - {scheme: pgm, variant: globalpad}
+  - {scheme: fixedcell, variant: bitmap}
+  - {scheme: fbdsse, variant: treecover}

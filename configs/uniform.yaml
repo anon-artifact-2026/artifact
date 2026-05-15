@@ -1,0 +1,18 @@
+name: uniform
+dataset:
+  type: synthetic
+benchmark:
+  N: 10000
+  ops: 1000
+  U: 1048576
+  B: 512
+  theta: 32
+  workload: mixed
+  dist: uniform
+  crypto: mock
+  out_dir: artifact_out/uniform
+cases:
+  - {scheme: loci, variant: full}
+  - {scheme: pgm, variant: naive}
+  - {scheme: fixedcell, variant: bitmap}
+  - {scheme: fbdsse, variant: treecover}

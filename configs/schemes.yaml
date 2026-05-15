@@ -1,0 +1,50 @@
+schemes:
+  PGM-Learned-Naive:
+    scheme: pgm
+    variant: naive
+    role: learned_naive
+
+  LOCI-Full:
+    scheme: loci
+    variant: full
+    role: loci_full
+
+  ResponseGlobalPad:
+    scheme: pgm
+    variant: globalpad
+    role: response_global_padding
+    description: "Response-padding baseline using the PGM learned layout with global query-response padding; not a server-state global-padding baseline."
+
+  FixedCell-Bitmap:
+    scheme: fixedcell
+    variant: bitmap
+    role: fixed_cell
+
+  TreeCover:
+    scheme: fbdsse
+    variant: treecover
+    role: tree_cover
+
+  LOCI-NoCert:
+    scheme: loci
+    variant: nocert
+    role: ablation
+
+  LOCI-NoPad:
+    scheme: loci
+    variant: nopad
+    role: ablation
+
+  LOCI-NoPublicRefresh:
+    scheme: loci
+    variant: nopublicrefresh
+    role: ablation
+
+  LOCI-NoProto:
+    scheme: loci
+    variant: noproto
+    role: ablation
+
+  Sim-L_cert:
+    simulated: true
+    role: certified_leakage_simulation

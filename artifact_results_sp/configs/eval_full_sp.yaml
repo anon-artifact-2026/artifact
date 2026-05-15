@@ -1,0 +1,191 @@
+machine:
+  name: paper-full-sp
+  implementation: "C++ implementation"
+  cpu: "recorded by runner host"
+  memory: "recorded by runner host"
+  storage: "recorded by runner host"
+  os: "recorded by runner host"
+
+defaults:
+  N: 1000000
+  trace_ops: 10000
+  query_ratio: 0.8
+  update_ratio: 0.2
+  seeds: [0, 1, 2]
+  warmup_runs: 1
+  crypto: mock
+  U: 1048576
+  B: 1024
+  theta: 128
+
+datasets:
+  synthetic:
+    workloads: [uniform, skew, hotspot, burst, drift, structured, skew_hotspot_drift_mix]
+  real:
+    - name: nyc_time
+      dataset: nyc
+      attribute: time
+      path: data/processed/nyc/nyc_time.csv
+      default: true
+    - name: gowalla_location
+      dataset: gowalla
+      attribute: location
+      path: data/processed/gowalla/gowalla_location.csv
+      default: true
+    - name: geolife_lat
+      dataset: geolife
+      attribute: lat
+      path: data/processed/geolife/geolife_lat.csv
+      default: true
+
+scales:
+  N_values: [10000, 25000, 50000, 100000, 200000]
+  selectivities: [0.001, 0.01, 0.05, 0.10]
+
+fig3:
+  max_wall_seconds: 7200
+  per_case_timeout_seconds: 600
+  treecover_timeout_seconds: 600
+  scale:
+    n_values: [10000, 25000, 50000, 100000, 200000]
+    ops: 1000
+    workload: skew
+    schemes: [PGM-Learned-Naive, LOCI-Full, ResponseGlobalPad, FixedCell-Bitmap]
+  treecover:
+    n_values: [10000, 25000]
+    ops: 500
+    workload: skew
+    timeout_seconds: 600
+  selectivity:
+    N: 100000
+    ops: 1000
+    values: [0.001, 0.01, 0.05, 0.10]
+    workload: skew
+    schemes: [PGM-Learned-Naive, LOCI-Full, ResponseGlobalPad, FixedCell-Bitmap]
+
+fig4_dynamic_refresh:
+  description: "Dynamic workload robustness"
+  workloads: [uniform, hotspot, burst, drift, structured]
+  N: [500000]
+  ops: 5000
+  U: 1048576
+  B: 1024
+  theta: 128
+  query_ratio: 0.8
+  crypto: mock
+  schemes: [PGM-Learned-Naive, LOCI-Full, LOCI-NoPad, LOCI-NoPublicRefresh, Sim-L_cert]
+  timeout_sec: 600
+
+fig5_real_datasets:
+  description: "Real-dataset robustness with sampled records"
+  datasets: [nyc_time, gowalla_location, geolife_lat]
+  workloads: [real_temporal]
+  N: [200000]
+  data_limit: 200000
+  ops: 2000
+  U: 1048576
+  B: 1024
+  theta: 128
+  query_ratio: 0.8
+  crypto: mock
+  schemes:
+    - name: PGM-Learned-Naive
+      scheme: pgm
+      variant: naive
+    - name: LOCI-Full
+      scheme: loci
+      variant: full
+    - name: ResponseGlobalPad
+      scheme: pgm
+      variant: globalpad
+    - name: FixedCell-Bitmap
+      scheme: fixedcell
+      variant: bitmap
+  timeout_sec: 600
+  max_wall_seconds: 7200
+  seeds: [0, 1, 2]
+
+fig6_tradeoff:
+  description: "Security-cost tradeoff under varying public budgets"
+  datasets: [synthetic]
+  distributions: [skew]
+  workloads: [hotspot]
+  N: [100000]
+  ops: 1000
+  U: 1048576
+  B: 512
+  query_ratio: 0.8
+  crypto: mock
+  theta_values: [32, 64, 128, 256]
+  cap_values: [32, 64, 128, 256]
+  schemes:
+    - name: LOCI-Full
+      scheme: loci
+      variant: full
+    - name: LOCI-NoProto
+      scheme: loci
+      variant: noproto
+    - name: LOCI-NoPad
+      scheme: loci
+      variant: nopad
+    - name: LOCI-NoCert
+      scheme: loci
+      variant: nocert
+    - name: ResponseGlobalPad
+      scheme: pgm
+      variant: globalpad
+    - name: Sim-L_cert
+      scheme: sim
+      variant: lcert
+  timeout_sec: 600
+  max_wall_seconds: 7200
+  seeds: [0, 1, 2]
+
+fig_mechanism:
+  description: "Raw learned-layout per-cell load and update-touch skew"
+  schemes: [PGM-Learned-Naive]
+  seeds: [0, 1, 2]
+  U: 1048576
+  B: 1024
+  theta: 128
+  query_ratio: 0.8
+  crypto: mock
+  timeout_sec: 600
+  max_wall_seconds: 7200
+  synthetic:
+    workloads: [skew_hotspot_drift_mix]
+    N: [200000]
+    ops: 2000
+    dist: skew
+  real:
+    datasets: [nyc_time, gowalla_location, geolife_lat]
+    workloads: [real_temporal]
+    N: [200000]
+    data_limit: 200000
+    ops: 2000
+
+timeouts:
+  default_seconds: 7200
+  fig3_case_seconds: 600
+  fig3_treecover_seconds: 600
+
+schemes:
+  main: [PGM-Learned-Naive, LOCI-Full, ResponseGlobalPad, FixedCell-Bitmap, TreeCover]
+  security: [PGM-Learned-Naive, LOCI-Full, ResponseGlobalPad, Sim-L_cert]
+  ablation: [LOCI-Full, LOCI-NoCert, LOCI-NoPad, LOCI-NoPublicRefresh, LOCI-NoProto, Sim-L_cert]
+  fig2_cost: [PGM-Learned-Naive, LOCI-NoCert, LOCI-NoPad, LOCI-NoPublicRefresh, LOCI-NoProto, LOCI-Full, ResponseGlobalPad, Sim-L_cert]
+  dynamic: [PGM-Learned-Naive, LOCI-Full, LOCI-NoPad, LOCI-NoPublicRefresh, Sim-L_cert]
+  real: [PGM-Learned-Naive, LOCI-Full, ResponseGlobalPad, FixedCell-Bitmap]
+  table2: [PGM-Learned-Naive, LOCI-Full, ResponseGlobalPad, FixedCell-Bitmap, TreeCover, LOCI-NoCert, LOCI-NoPad, LOCI-NoPublicRefresh, LOCI-NoProto, Sim-L_cert]
+
+groups:
+  table1: true
+  fig1: false
+  fig2: true
+  fig3: true
+  fig4: true
+  fig5: true
+  fig6: true
+  fig_mechanism: true
+  table2: true
+  appendix: false

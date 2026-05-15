@@ -1,0 +1,22 @@
+root: artifact_out/formal_smoke
+
+experiments:
+  - name: core_attack_smoke
+    benchmark: {N: 200, ops: 60, U: 1048576, B: 64, theta: 8, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: true
+    cases:
+      - {scheme: pgm, variant: naive}
+      - {scheme: pgm, variant: globalpad}
+      - {scheme: fixedcell, variant: bitmap}
+      - {scheme: loci, variant: full}
+      - {scheme: loci, variant: nocert}
+      - {scheme: loci, variant: nopad}
+      - {scheme: loci, variant: nopublicrefresh}
+
+  - name: workload_drift_smoke
+    benchmark: {N: 200, ops: 60, U: 1048576, B: 64, theta: 8, dist: skew, workload: drift, crypto: mock}
+    attack_eval: true
+    cases:
+      - {scheme: pgm, variant: naive}
+      - {scheme: loci, variant: full}
+      - {scheme: loci, variant: nopublicrefresh}

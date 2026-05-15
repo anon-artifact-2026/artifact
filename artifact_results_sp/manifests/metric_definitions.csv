@@ -1,0 +1,24 @@
+metric_name,definition,metric_unit,metric_source,auc_mode,is_paper_metric
+layout_shape_auc,AUC for certified layout-shape probe from attack_eval.py layout_class_auc,auc,attack_eval.py,raw_auc,true
+patch_pressure_auc,AUC for certified patch-pressure probe from attack_eval.py log_growth_auc,auc,attack_eval.py,raw_auc,true
+maintenance_cause_auc,AUC for certified maintenance-cause probe from attack_eval.py maintenance_auc,auc,attack_eval.py,raw_auc,true
+layout_shape_adv_auc,"max(layout_shape_auc, 1-layout_shape_auc)",auc,derived,adv_auc,true
+patch_pressure_adv_auc,"max(patch_pressure_auc, 1-patch_pressure_auc)",auc,derived,adv_auc,true
+maintenance_cause_adv_auc,"max(maintenance_cause_auc, 1-maintenance_cause_auc)",auc,derived,adv_auc,true
+max_cert_probe_auc,max of the three certified-probe adversarial AUCs,auc,derived,adv_auc,true
+diagnostic_region_auc,Diagnostic dense-region AUC preserved from attack_eval.py region_auc; excluded from paper certified-probe max,auc,attack_eval.py,raw_auc,false
+diagnostic_hotspot_auc,Diagnostic hotspot AUC preserved from attack_eval.py hotspot_auc; excluded from paper certified-probe max,auc,attack_eval.py,raw_auc,false
+search_latency_ms,Benchmark average search latency,ms,bench_wide.csv,not_auc,true
+patch_update_latency_ms,Benchmark fixed-class patch update latency when available,ms,bench_wide.csv,not_auc,true
+update_latency_ms,Benchmark average update latency; included for scale/selectivity compatibility,ms,bench_wide.csv,not_auc,true
+maintenance_latency_ms,Benchmark maintenance portion of update path when available,ms,bench_wide.csv,not_auc,true
+response_bytes,"Per-search response bytes, computed as response_bytes/searches when searches is present",bytes,bench_wide.csv,not_auc,true
+response_mib,response_bytes divided by 2^20,MiB,derived,not_auc,true
+server_storage_bytes,Server-side storage bytes,bytes,bench_wide.csv,not_auc,true
+server_storage_mib,server_storage_bytes divided by 2^20,MiB,derived,not_auc,true
+refresh_count,Benchmark refresh event count,count,bench_wide.csv,not_auc,true
+forced_rollover_count,Forced public rollover/log refresh count when available,count,bench_wide.csv,not_auc,true
+true_cell_load,Mechanism diagnostic raw cell load,records,mechanism CSV,not_auc,true
+real_cell_load,Mechanism diagnostic real-trace cell load,records,mechanism CSV,not_auc,true
+update_touches,Mechanism diagnostic update touches per cell,count,mechanism CSV,not_auc,true
+touch_skew,Mechanism diagnostic skew summary computed by make_paper_summaries.py,ratio,derived,not_auc,true

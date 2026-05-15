@@ -1,0 +1,185 @@
+machine:
+  name: artifact-quick
+  implementation: "C++ implementation"
+  cpu: "developer workstation"
+  memory: "developer workstation"
+  storage: "developer workstation"
+  os: "developer workstation"
+
+defaults:
+  N: 50000
+  trace_ops: 500
+  query_ratio: 0.8
+  update_ratio: 0.2
+  seeds: [0]
+  warmup_runs: 1
+  crypto: mock
+  U: 1048576
+  B: 1024
+  theta: 128
+
+datasets:
+  synthetic:
+    workloads: [uniform, skew, hotspot, burst, drift, structured, skew_hotspot_drift_mix]
+  real:
+    - name: nyc_time
+      dataset: nyc
+      attribute: time
+      path: data/processed/nyc/nyc_time.csv
+      default: true
+    - name: gowalla_location
+      dataset: gowalla
+      attribute: location
+      path: data/processed/gowalla/gowalla_location.csv
+      default: true
+    - name: geolife_lat
+      dataset: geolife
+      attribute: lat
+      path: data/processed/geolife/geolife_lat.csv
+      default: true
+
+scales:
+  N_values: [10000, 25000, 50000]
+  selectivities: [0.001, 0.01, 0.10]
+
+fig3:
+  max_wall_seconds: 1800
+  per_case_timeout_seconds: 300
+  treecover_timeout_seconds: 300
+  scale:
+    n_values: [10000, 25000, 50000]
+    ops: 500
+    workload: skew
+    schemes: [PGM-Learned-Naive, LOCI-Full, ResponseGlobalPad]
+  treecover:
+    n_values: [10000]
+    ops: 300
+    workload: skew
+    timeout_seconds: 300
+  selectivity:
+    N: 50000
+    ops: 500
+    values: [0.001, 0.01, 0.10]
+    workload: skew
+    schemes: [PGM-Learned-Naive, LOCI-Full, ResponseGlobalPad]
+
+fig4_dynamic_refresh:
+  description: "Quick dynamic workload robustness"
+  workloads: [uniform, hotspot, burst, drift, structured]
+  N: [50000]
+  ops: 500
+  U: 1048576
+  B: 1024
+  theta: 128
+  query_ratio: 0.8
+  crypto: mock
+  schemes: [PGM-Learned-Naive, LOCI-Full, LOCI-NoPad, LOCI-NoPublicRefresh, Sim-L_cert]
+  timeout_sec: 300
+
+fig5_real_datasets:
+  description: "Quick real-dataset pipeline validation"
+  datasets: [nyc_time, gowalla_location, geolife_lat]
+  workloads: [real_temporal]
+  N: [50000]
+  data_limit: 50000
+  ops: 500
+  U: 1048576
+  B: 1024
+  theta: 128
+  query_ratio: 0.8
+  crypto: mock
+  schemes:
+    - name: PGM-Learned-Naive
+      scheme: pgm
+      variant: naive
+    - name: LOCI-Full
+      scheme: loci
+      variant: full
+    - name: ResponseGlobalPad
+      scheme: pgm
+      variant: globalpad
+  timeout_sec: 300
+  max_wall_seconds: 1800
+  seeds: [0]
+
+fig6_tradeoff:
+  description: "Quick certified-budget sensitivity"
+  datasets: [synthetic]
+  distributions: [skew]
+  workloads: [hotspot]
+  N: [50000]
+  ops: 500
+  U: 1048576
+  B: 512
+  query_ratio: 0.8
+  crypto: mock
+  theta_values: [32, 128, 256]
+  cap_values: [32, 128, 256]
+  schemes:
+    - name: LOCI-Full
+      scheme: loci
+      variant: full
+    - name: LOCI-NoPad
+      scheme: loci
+      variant: nopad
+    - name: LOCI-NoPublicRefresh
+      scheme: loci
+      variant: nopublicrefresh
+    - name: ResponseGlobalPad
+      scheme: pgm
+      variant: globalpad
+    - name: Sim-L_cert
+      scheme: sim
+      variant: lcert
+  timeout_sec: 300
+  max_wall_seconds: 1800
+  seeds: [0]
+
+fig_mechanism:
+  description: "Quick mechanism diagnostic"
+  schemes: [PGM-Learned-Naive]
+  seeds: [0]
+  U: 1048576
+  B: 1024
+  theta: 128
+  query_ratio: 0.8
+  crypto: mock
+  timeout_sec: 300
+  max_wall_seconds: 1800
+  synthetic:
+    workloads: [skew_hotspot_drift_mix]
+    N: [50000]
+    ops: 500
+    dist: skew
+  real:
+    datasets: [nyc_time]
+    workloads: [real_temporal]
+    N: [50000]
+    data_limit: 50000
+    ops: 500
+
+timeouts:
+  default_seconds: 1800
+  fig3_case_seconds: 300
+  fig3_treecover_seconds: 300
+
+schemes:
+  main: [PGM-Learned-Naive, LOCI-Full, ResponseGlobalPad]
+  security: [PGM-Learned-Naive, LOCI-Full, ResponseGlobalPad, Sim-L_cert]
+  ablation: [LOCI-Full, LOCI-NoPad, LOCI-NoPublicRefresh, Sim-L_cert]
+  fig2_cost: [PGM-Learned-Naive, LOCI-NoPad, LOCI-NoPublicRefresh, LOCI-Full, ResponseGlobalPad, Sim-L_cert]
+  dynamic: [PGM-Learned-Naive, LOCI-Full, LOCI-NoPad, LOCI-NoPublicRefresh, Sim-L_cert]
+  real: [PGM-Learned-Naive, LOCI-Full, ResponseGlobalPad]
+  table2: [PGM-Learned-Naive, LOCI-Full, ResponseGlobalPad, LOCI-NoPad, LOCI-NoPublicRefresh, Sim-L_cert]
+
+groups:
+  table1: false
+  fig1: false
+  fig2: true
+  fig3: true
+  fig4: true
+  fig5: true
+  fig6: true
+  fig_mechanism: true
+  table2: true
+  appendix: false

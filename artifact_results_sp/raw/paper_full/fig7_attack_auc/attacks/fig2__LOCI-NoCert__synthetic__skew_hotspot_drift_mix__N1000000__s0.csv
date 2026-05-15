@@ -1,0 +1,2 @@
+scheme,dataset,units,top_k,region_precision_at_k,hotspot_precision_at_k,hotspot_log_precision_at_k,layout_class_precision_at_k,distinct_precision_at_k,region_auc,load_auc,layout_class_auc,hotspot_auc,hotspot_log_auc,log_growth_auc,maintenance_auc,log_correlation,log_truth_correlation,maintenance_correlation
+LOCI-NoCert,skew-skew_hotspot_drift_mix-N1000000-U1048576-B1024-T128,977,196,0.4897959183673469,1.0,0.14795918367346939,0.41836734693877553,0.0,0.9995747963844542,0.5164852752880922,0.8190735321017011,0.9863466513365909,0.5,0.5,0.5,0.0,0.0,0.0

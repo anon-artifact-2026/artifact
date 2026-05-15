@@ -1,0 +1,9 @@
+paper_fig,benchmark_group,group_dir,metric_sources,notes
+fig6_mechanism,fig_mechanism,fig_mechanism_cell_load_touch_skew,mechanism CSV,table1 is dataset profile only; table2_summary is derived from fig2 attack_eval.py and fig2 bench_wide.csv
+fig7_attack_auc,fig2_component_ablation,fig2_component_ablation,attack_eval.py outputs,table1 is dataset profile only; table2_summary is derived from fig2 attack_eval.py and fig2 bench_wide.csv
+fig8_absolute_cost,fig2_component_ablation,fig2_component_ablation,bench_wide.csv only,table1 is dataset profile only; table2_summary is derived from fig2 attack_eval.py and fig2 bench_wide.csv
+fig9_scale_select,fig3_scalability_selectivity,fig3_scalability_selectivity,bench_wide.csv,table1 is dataset profile only; table2_summary is derived from fig2 attack_eval.py and fig2 bench_wide.csv
+fig10_workload,fig4_dynamic_refresh,fig4_dynamic_refresh,attack_eval.py outputs,table1 is dataset profile only; table2_summary is derived from fig2 attack_eval.py and fig2 bench_wide.csv
+fig11_real_trace,fig5_real_datasets,fig5_real_datasets,attack_eval.py outputs + bench_wide.csv,table1 is dataset profile only; table2_summary is derived from fig2 attack_eval.py and fig2 bench_wide.csv
+fig12_budget,fig6_tradeoff,fig6_tradeoff,attack_eval.py outputs + bench_wide.csv,table1 is dataset profile only; table2_summary is derived from fig2 attack_eval.py and fig2 bench_wide.csv
+table2_summary,derived,fig2_component_ablation,fig2 attack_eval.py + fig2 bench_wide.csv,"derived summary, not an independent benchmark group"

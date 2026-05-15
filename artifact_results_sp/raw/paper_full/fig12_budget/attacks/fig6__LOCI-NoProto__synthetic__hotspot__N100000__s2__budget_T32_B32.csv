@@ -1,0 +1,2 @@
+scheme,dataset,units,top_k,region_precision_at_k,hotspot_precision_at_k,hotspot_log_precision_at_k,layout_class_precision_at_k,distinct_precision_at_k,region_auc,load_auc,layout_class_auc,hotspot_auc,hotspot_log_auc,log_growth_auc,maintenance_auc,log_correlation,log_truth_correlation,maintenance_correlation
+LOCI-NoProto,skew-hotspot-N100000-U1048576-B32-T32,4594,919,0.8019586507072906,1.0,0.8248095756256801,0.35364526659412404,0.0,0.9987767427850698,0.6336411213016219,0.5,1.0,0.5,0.5,0.5,0.0,0.0,0.0

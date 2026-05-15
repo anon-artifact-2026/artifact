@@ -1,0 +1,2 @@
+scheme,dataset,units,top_k,region_precision_at_k,hotspot_precision_at_k,hotspot_log_precision_at_k,layout_class_precision_at_k,distinct_precision_at_k,region_auc,load_auc,layout_class_auc,hotspot_auc,hotspot_log_auc,log_growth_auc,maintenance_auc,log_correlation,log_truth_correlation,maintenance_correlation
+LOCI-Full,nyc_time-real_temporal-L50000-U1048576-B1024-T128,91,19,0.5263157894736842,1.0,0.42105263157894735,0.15789473684210525,0.42105263157894735,0.8304093567251462,0.8304093567251462,0.5,0.9692982456140351,0.5,0.5,0.5,0.0,0.0,0.0

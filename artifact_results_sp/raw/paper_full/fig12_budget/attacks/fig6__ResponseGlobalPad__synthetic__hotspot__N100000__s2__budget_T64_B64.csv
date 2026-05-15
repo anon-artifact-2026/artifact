@@ -1,0 +1,2 @@
+scheme,dataset,units,top_k,region_precision_at_k,hotspot_precision_at_k,hotspot_log_precision_at_k,layout_class_precision_at_k,distinct_precision_at_k,region_auc,load_auc,layout_class_auc,hotspot_auc,hotspot_log_auc,log_growth_auc,maintenance_auc,log_correlation,log_truth_correlation,maintenance_correlation
+PGM-Learned-GlobalPad,skew-hotspot-N100000-U1048576-B64-T64,1563,313,0.8146964856230032,1.0,0.5143769968051118,0.7252396166134185,0.003194888178913738,0.9970256217288681,0.3923642172523962,0.5,0.7859424920127795,0.5,0.5,0.5,0.0,0.0,0.0

@@ -1,0 +1,30 @@
+build/
+artifact_out/
+results/
+bench_loci
+bench_loci.exe
+*.o
+__pycache__/
+**/__pycache__/
+.pytest_cache/
+data/raw/
+*.parquet
+*.tmp
+*.log
+artifact_smoke/
+trace_smoke/
+figure_smoke/
+
+# CSV artifacts and processed data are intentionally versioned.
+!artifact_results_sp/**/*.csv
+!data/processed/**/*.csv
+!data/sample/**/*.csv
+
+# Documentation, scripts, configs, manifests, and validation report are versioned.
+!artifact_results_sp/**/*.md
+!artifact_results_sp/**/*.py
+!artifact_results_sp/**/*.sh
+!artifact_results_sp/**/*.yaml
+!artifact_results_sp/manifests/validation_report.txt
+!data/README.md
+!data/sha256_manifest.txt

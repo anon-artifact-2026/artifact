@@ -1,0 +1,3 @@
+artifact_version,profile,config_file,config_hash,generated_from,run_status,notes,run_root,exists
+artifact-v1,paper_full,configs/eval_full_sp.yaml,3df982f4955839fae82b15c7031cdc835ded16a77ca23570645762f092391751,archived-full-normalized,not-rerun-in-this-cleanup,run_full.sh can rerun full profile,artifact_out/eval_full_sp,false
+artifact-v1,quick,configs/eval_quick.yaml,cc6a12cb9a41f1f2cd63c8b8edee329f0df3cd7e835606ac1145943d66333671,quick-rerun,completed,used for pipeline validation,artifact_out/eval_quick_sp,false

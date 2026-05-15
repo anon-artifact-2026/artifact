@@ -1,0 +1,2 @@
+scheme,dataset,units,top_k,region_precision_at_k,hotspot_precision_at_k,hotspot_log_precision_at_k,layout_class_precision_at_k,distinct_precision_at_k,region_auc,load_auc,layout_class_auc,hotspot_auc,hotspot_log_auc,log_growth_auc,maintenance_auc,log_correlation,log_truth_correlation,maintenance_correlation
+PGM-Learned-Naive,skew-burst-N1000000-U1048576-B1024-T128,977,196,0.2193877551020408,1.0,1.0,1.0,0.0,0.5337087459823878,0.5324348689539836,0.9789320337610076,0.9832011549818391,0.9832011549818391,0.9832011549818391,0.5,1.0,1.0,0.0

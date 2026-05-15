@@ -1,0 +1,20 @@
+{
+  "dataset": "gowalla",
+  "attribute": "lat",
+  "source_files": [
+    "data/raw/gowalla/Gowalla_totalCheckins.txt"
+  ],
+  "rows": 1000000,
+  "value_min": 44087304,
+  "value_max": 160640771,
+  "time_min": 1233724658,
+  "time_max": 1267775560,
+  "schema": [
+    "rid",
+    "value",
+    "time"
+  ],
+  "sorted_by": "time",
+  "max_n": 1000000,
+  "value_scale": "round((latitude + 90.0) * 1000000)"
+}

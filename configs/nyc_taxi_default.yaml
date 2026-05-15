@@ -1,0 +1,26 @@
+# Legacy/non-paper config, not used by artifact_results_sp.
+name: nyc_taxi_default
+dataset:
+  type: csv
+  path: data/processed/nyc_taxi_yellow.csv
+  limit: 100000
+benchmark:
+  N: 100000
+  ops: 1000
+  U: 1048576
+  B: 512
+  theta: 32
+  workload: hotspot
+  dist: skew
+  crypto: mock
+  out_dir: artifact_out/nyc_taxi_default
+cases:
+  - {scheme: loci, variant: full}
+  - {scheme: loci, variant: nocert}
+  - {scheme: loci, variant: nopad}
+  - {scheme: loci, variant: noproto}
+  - {scheme: loci, variant: nopublicrefresh}
+  - {scheme: pgm, variant: naive}
+  - {scheme: pgm, variant: globalpad}
+  - {scheme: fixedcell, variant: bitmap}
+  - {scheme: fbdsse, variant: treecover}

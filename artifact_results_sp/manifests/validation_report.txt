@@ -1,0 +1,1 @@
+artifact_results_sp validation passed: paper figures map to 7 benchmark groups; table1/table2 are not independent experiments; AUC and cost metric sources are separated; residual Lcert probe separated from certified-probe AUC.

@@ -1,0 +1,147 @@
+# Legacy/non-paper config, not used by artifact_results_sp.
+root: artifact_out/formal
+
+preprocess:
+  nyc_taxi:
+    inputs: [data]
+    out: data/processed/nyc_taxi_yellow.csv
+    universe: 1048576
+
+experiments:
+  - name: core_attack
+    description: Synthetic skew-hotspot core attack.
+    benchmark: {N: 10000, ops: 3000, U: 1048576, B: 256, theta: 32, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: true
+    cases:
+      - {scheme: pgm, variant: naive}
+      - {scheme: pgm, variant: globalpad}
+      - {scheme: fixedcell, variant: bitmap}
+      - {scheme: loci, variant: full}
+      - {scheme: loci, variant: nocert}
+      - {scheme: loci, variant: nopad}
+      - {scheme: loci, variant: nopublicrefresh}
+
+  - name: nyc_taxi_attack
+    description: NYC Taxi attack validation on fare_amount rank values.
+    dataset: {type: csv, path: data/processed/nyc_taxi_yellow.csv, limit: 50000, preprocess: nyc_taxi}
+    benchmark: {N: 50000, ops: 10000, U: 1048576, B: 512, theta: 64, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: true
+    cases:
+      - {scheme: pgm, variant: naive}
+      - {scheme: pgm, variant: globalpad}
+      - {scheme: loci, variant: full}
+      - {scheme: loci, variant: nopad}
+      - {scheme: loci, variant: nopublicrefresh}
+      - {scheme: fixedcell, variant: bitmap}
+
+  - name: nyc_taxi_attack_quick
+    description: Smaller NYC Taxi attack validation for slower machines.
+    dataset: {type: csv, path: data/processed/nyc_taxi_yellow.csv, limit: 20000, preprocess: nyc_taxi}
+    benchmark: {N: 20000, ops: 5000, U: 1048576, B: 512, theta: 64, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: true
+    cases:
+      - {scheme: pgm, variant: naive}
+      - {scheme: pgm, variant: globalpad}
+      - {scheme: loci, variant: full}
+      - {scheme: loci, variant: nopad}
+      - {scheme: loci, variant: nopublicrefresh}
+      - {scheme: fixedcell, variant: bitmap}
+
+  - name: scaling_N10000
+    description: Scaling point N=10000.
+    benchmark: {N: 10000, ops: 3000, U: 1048576, B: 256, theta: 32, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: true
+    cases: &scaling_cases
+      - {scheme: pgm, variant: naive}
+      - {scheme: loci, variant: full}
+      - {scheme: loci, variant: nopad}
+      - {scheme: loci, variant: nopublicrefresh}
+      - {scheme: pgm, variant: globalpad}
+
+  - name: scaling_N20000
+    description: Scaling point N=20000.
+    benchmark: {N: 20000, ops: 5000, U: 1048576, B: 512, theta: 64, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: true
+    cases: *scaling_cases
+
+  - name: scaling_N50000
+    description: Scaling point N=50000.
+    benchmark: {N: 50000, ops: 10000, U: 1048576, B: 512, theta: 64, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: true
+    cases: *scaling_cases
+
+  - name: scaling_N100000
+    description: Scaling point N=100000.
+    benchmark: {N: 100000, ops: 20000, U: 1048576, B: 1024, theta: 128, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: true
+    cases: *scaling_cases
+
+  - name: fbdsse_anchor
+    description: External range-DSSE performance anchor.
+    benchmark: {N: 10000, ops: 3000, U: 1048576, B: 256, theta: 32, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: false
+    cases:
+      - {scheme: fbdsse, variant: treecover}
+      - {scheme: fixedcell, variant: bitmap}
+      - {scheme: pgm, variant: naive}
+      - {scheme: loci, variant: full}
+
+  - name: noproto_cost_N10000
+    description: LBC prototype-residual cost ablation at N=10000.
+    benchmark: {N: 10000, ops: 3000, U: 1048576, B: 256, theta: 32, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: false
+    cases: &noproto_cases
+      - {scheme: loci, variant: full}
+      - {scheme: loci, variant: noproto}
+      - {scheme: pgm, variant: globalpad}
+
+  - name: noproto_cost_N50000
+    description: LBC prototype-residual cost ablation at N=50000.
+    benchmark: {N: 50000, ops: 10000, U: 1048576, B: 512, theta: 64, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: false
+    cases: *noproto_cases
+
+  - name: theta_sweep
+    description: Log threshold sensitivity.
+    sweep:
+      parameter: theta
+      values: [16, 32, 64, 128]
+    benchmark: {N: 10000, ops: 3000, U: 1048576, B: 256, theta: 32, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: true
+    cases:
+      - {scheme: pgm, variant: naive}
+      - {scheme: loci, variant: nopad}
+      - {scheme: loci, variant: full}
+      - {scheme: loci, variant: nopublicrefresh}
+
+  - name: capacity_sweep
+    description: Cell capacity sensitivity.
+    sweep:
+      parameter: B
+      values: [128, 256, 512, 1024]
+    benchmark: {N: 10000, ops: 3000, U: 1048576, B: 256, theta: 64, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: true
+    cases:
+      - {scheme: pgm, variant: naive}
+      - {scheme: loci, variant: full}
+
+  - name: workload_sweep
+    description: Update/query skew sensitivity.
+    sweep:
+      parameter: workload
+      values: [uniform, hotspot, drift]
+    benchmark: {N: 10000, ops: 3000, U: 1048576, B: 256, theta: 32, dist: skew, workload: hotspot, crypto: mock}
+    attack_eval: true
+    cases:
+      - {scheme: pgm, variant: naive}
+      - {scheme: loci, variant: full}
+      - {scheme: loci, variant: nopublicrefresh}
+
+  - name: real_crypto_sanity
+    description: OpenSSL-backed crypto sanity check.
+    benchmark: {N: 5000, ops: 1000, U: 1048576, B: 256, theta: 32, dist: skew, workload: hotspot, crypto: real}
+    attack_eval: false
+    cases:
+      - {scheme: pgm, variant: naive}
+      - {scheme: pgm, variant: globalpad}
+      - {scheme: loci, variant: full}

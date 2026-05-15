@@ -1,0 +1,63 @@
+datasets:
+  nyc_time:
+    dataset: nyc
+    attribute: time
+    path: data/processed/nyc/nyc_time.csv
+    default: true
+
+  nyc_distance:
+    dataset: nyc
+    attribute: distance
+    path: data/processed/nyc/nyc_distance.csv
+
+  nyc_fare:
+    dataset: nyc
+    attribute: fare
+    path: data/processed/nyc/nyc_fare.csv
+
+  nyc_pu_zone:
+    dataset: nyc
+    attribute: pu_zone
+    path: data/processed/nyc/nyc_pu_zone.csv
+
+  gowalla_location:
+    dataset: gowalla
+    attribute: location
+    path: data/processed/gowalla/gowalla_location.csv
+    default: true
+
+  gowalla_time:
+    dataset: gowalla
+    attribute: time
+    path: data/processed/gowalla/gowalla_time.csv
+
+  gowalla_lat:
+    dataset: gowalla
+    attribute: lat
+    path: data/processed/gowalla/gowalla_lat.csv
+
+  gowalla_lon:
+    dataset: gowalla
+    attribute: lon
+    path: data/processed/gowalla/gowalla_lon.csv
+
+  geolife_lat:
+    dataset: geolife
+    attribute: lat
+    path: data/processed/geolife/geolife_lat.csv
+    default: true
+
+  geolife_time:
+    dataset: geolife
+    attribute: time
+    path: data/processed/geolife/geolife_time.csv
+
+  geolife_lon:
+    dataset: geolife
+    attribute: lon
+    path: data/processed/geolife/geolife_lon.csv
+
+  geolife_alt:
+    dataset: geolife
+    attribute: alt
+    path: data/processed/geolife/geolife_alt.csv

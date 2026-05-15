@@ -1,0 +1,2 @@
+scheme,dataset,units,top_k,region_precision_at_k,hotspot_precision_at_k,hotspot_log_precision_at_k,layout_class_precision_at_k,distinct_precision_at_k,region_auc,load_auc,layout_class_auc,hotspot_auc,hotspot_log_auc,log_growth_auc,maintenance_auc,log_correlation,log_truth_correlation,maintenance_correlation
+LOCI-NoPublicRefresh,uniform-uniform-N1000000-U1048576-B1024-T128,1706,342,0.2807017543859649,1.0,0.3362573099415205,0.20760233918128654,0.24853801169590642,0.6108474387336866,0.611173277769203,0.5,0.9802781636397935,0.5,0.5,0.9649122807017544,0.0,0.0,1.0
